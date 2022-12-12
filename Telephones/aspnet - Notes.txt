@@ -1,0 +1,52 @@
+Search Phone/ Search Name Functionality:
+	1. Admin can search for everything and E,S,D everything
+	2. Users can search for everything and E,S,D only their own
+	3. Visitors can't search(needs Login)
+Information Functionality:
+	1. Admin can E,S,D
+	2. Users can E,D their own and see details of other users
+	3. Visitors cannot do anything(needs Login)
+
+Needed:
+1. Information View:
+	a. Admin **
+	b. User **
+	c. Visitor **
+2. Search Phone Results:
+	a. Admin **
+	b. User **
+	c. Visitor **
+3. Search Name Results:
+	a. Admin **
+	b. User **
+	c. Visitor **
+4. Search Phone:
+	a. Admin **
+	b. User **
+	c. Visitor **
+5. Search Name:
+	a. Admin **
+	b. User **
+	c. Visitor **
+
+Details:
+	1. If admin is logged in, index is welcome admin **
+	2. If Admin is logged in, Information is Total Phone Numbers(Admin Control) **
+	3. Hello and only the name of the User Email (Top Right) **
+	4. If there is a visitor the search phone/name will have (Needs Login) **
+	5. In create, if admin is logged in he can put other emails, if user is logged in his email will be auto inserted **
+	6. If Visitor get to the search(phone,name), their access will be prohibited **
+	7. Fix Boxes for <a> **
+	8. If Admin creates something, it is only visible to him and not others **
+
+Admin Email: Admin@yahoo.com
+Admin Pass : 2pVQ5Vg3#qr@
+
+Random Email: kati@yahoo.com
+Random Pass : P@W7S49URXnD 
+
+Random Email: kati123@yahoo.com
+Random Pass : tN2V*WDZ96Im
+
+Random Email: kati321@yahoo.com
+Random Pass : 5gDJcKo@6I0f

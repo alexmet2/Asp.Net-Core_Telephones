@@ -1,0 +1,24 @@
+﻿@model Telephones.Models.Information
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "Home Page";
+}
+@{
+    string SignIn = "Admin@yahoo.com";
+}
+
+@if (@SignIn == @User.Identity?.Name && SignInManager.IsSignedIn(User))
+{
+    <div class="text-center" style="position: absolute;top: 50%;left: 50%;-ms-transform: translateX(-50%) translateY(-50%);-webkit-transform: translate(-50%,-50%);transform: translate(-50%,-50%);">
+        <h1 class="display-4">Welcome Admin</h1>
+        <p>This is a web application made by Metushi Alex</p>
+    </div>
+}
+else{
+    <div class="text-center" style="position: absolute;top: 50%;left: 50%;-ms-transform: translateX(-50%) translateY(-50%);-webkit-transform: translate(-50%,-50%);transform: translate(-50%,-50%);">
+        <h1 class="display-4">Welcome</h1>
+        <p>This is a web application made by Metushi Alex</p>
+    </div>
+}

@@ -1,0 +1,221 @@
+﻿@model IEnumerable<Telephones.Models.Information>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    string SignIn = "Admin@yahoo.com";
+    string Name = "Admin";
+}
+@{
+    ViewData["Title"] = "Information";
+}
+@if (@SignIn != @User.Identity?.Name && SignInManager.IsSignedIn(User)) /* User with detail, and edit/delete for his own info */
+{
+    <h1 style="margin-top:25px">Total Phone Numbers</h1>
+    <p>
+        <a asp-action="Create">
+            <div class="form-group">
+                <input value="Create New" class="btn btn-primary" />
+            </div>
+        </a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="text-align:center">
+                    <p>Phone Number</p>
+                </th>
+                <th style="text-align:center">
+                    <p>Owner</p>
+                </th >
+                <th style="text-align:center">
+                    <p>Edit</p>
+                </th>
+                <th style="text-align:center">
+                    <p>Details</p>
+                </th>
+                <th style="text-align:center">
+                    <p>Delete</p>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    <td style="text-align:center">
+                        @if (item.Email != SignIn && item.Name != Name)
+                        {
+                            @Html.DisplayFor(modelItem => item.PhoneNumber)
+                        }
+                        else
+                        {
+                            <p>###########</p>
+                        }
+                    </td>
+                    <td style="text-align:center">
+                       @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td style="text-align:center">
+                        @if (@User.Identity?.Name == @item.Email)
+                        {
+                           <a asp-action="Edit" asp-route-id="@item.Id">
+                           <div class="form-group">
+                                <input value="Edit" class="btn btn-primary" />
+                           </div>
+                            </a>
+                        }
+                        else
+                        {
+                            <p>Not Available</p>
+                        }
+                    </td>
+                    <td style="text-align:center">
+                        @if (item.Email != SignIn && item.Name != Name)
+                        {
+                            <a asp-action="Details" asp-route-id="@item.Id">
+                                <div class="form-group">
+                                    <input value="Details" class="btn btn-primary" />
+                                </div>
+                            </a>
+                        }
+                        else
+                        {
+                            <p>Not Available</p>
+                        }
+                    </td>
+                    <td style="text-align:center">
+                        @if (@User.Identity?.Name == @item.Email )
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.Id" >
+                            <div class="form-group">
+                                <input value="Delete" class="btn btn-primary" />
+                            </div>
+                            </a>
+                        }
+                        else
+                        {
+                            <p>Not Available</p>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (@SignIn == @User.Identity?.Name && SignInManager.IsSignedIn(User)) /* Admin with edit, details, delete */
+{
+    <h1 style="margin-top:25px">Total Phone Numbers (Admin Control)</h1>
+
+        <p>
+            <a asp-action="Create">
+                <div class="form-group">
+                    <input value="Create New" class="btn btn-primary" />
+                </div>
+            </a>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                <th style="text-align:center">
+                    <p>Phone Number</p>
+                </th>
+                <th style="text-align:center">
+                    <p>Owner</p>
+                </th>
+                <th style="text-align:center">
+                    <p>Edit</p>
+                </th>
+                <th style="text-align:center">
+                    <p>Details</p>
+                </th>
+                <th style="text-align:center">
+                    <p>Delete</p>
+                </th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td style="text-align:center">
+                        <a asp-action="Edit" asp-route-id="@item.Id">
+                            <div class="form-group">
+                                <input value="Edit" class="btn btn-primary" />
+                            </div>
+                        </a>
+                    </td>
+                    <td style="text-align:center">
+                        <a asp-action="Details" asp-route-id="@item.Id" >
+                            <div class="form-group">
+                                <input value="Details" class="btn btn-primary" />
+                            </div>
+                        </a>
+                    </td>
+                    <td style="text-align:center">
+                        <a asp-action="Delete" asp-route-id="@item.Id" >
+                            <div class="form-group">
+                                <input value="Delete" class="btn btn-primary" />
+                            </div>
+                        </a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+    </table>
+}
+else /* Visitor with no edit, detail, delete */
+{
+    <h1 style="margin-top:25px">Total Phone Numbers</h1>
+
+    <p>
+        <a asp-action="Create">
+            <div class="form-group">
+                <input value="Create New" class="btn btn-primary" />
+            </div>
+        </a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="text-align:center">
+                    <p>Phone Number</p>
+                </th>
+                <th style="text-align:center">
+                    <p>Owner</p>
+                </th>
+                <th style="text-align:center">
+                    <p>To edit, see details and delete, please sign in</p>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="text-align:center">
+                        @if (item.Email != SignIn && item.Name != Name)
+                        {
+                            @Html.DisplayFor(modelItem => item.PhoneNumber)
+                        }
+                        else
+                        {
+                            <p>###########</p>
+                        }
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
